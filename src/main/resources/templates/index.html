@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta http-equiv="Content-Type" charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
@@ -17,7 +18,7 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="#">Brand</a>
+              <a class="navbar-brand" href="#">社区论坛</a>
           </div>
 
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -28,9 +29,11 @@
                   <button type="submit" class="btn btn-default">搜索</button>
               </form>
               <ul class="nav navbar-nav navbar-right">
-                  <li><a href="https://github.com/login/oauth/authorize?client_id=Ov23liZAEJWnw3KHVC5I&redirect_uri=http://localhost:8887/callback&scope=user&state=1">登录</a></li>
-                  <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">我<span class="caret"></span></a>
+                  <li th:if="${session.user == null}">
+                      <a href="https://github.com/login/oauth/authorize?client_id=Ov23liZAEJWnw3KHVC5I&redirect_uri=http://localhost:8887/callback&scope=user&state=1">登录</a>
+                  </li>
+                  <li class="dropdown" th:if="${session.user != null}">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" th:text="${session.user.getName()}"><span class="caret"></span></a>
                       <ul class="dropdown-menu">
                           <li><a href="#">消息中心</a></li>
                           <li><a href="#">个人资料</a></li>
